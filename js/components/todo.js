@@ -4,3 +4,4 @@
 // e.target.value has nothing to do with the value attribute in input  value="hello"
 // what is key in list component
 // using bind(this) to bind the function with the whole component to allow it access the state;
+// need to add role in state in reducers for each object

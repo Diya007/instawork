@@ -9,6 +9,8 @@ import { addInfo } from '../actions/index'
 // 	display : flex;
 
 // ’
+
+//-----------App Component---------------
 class App extends React.Component {
 	render() {
 		return (
@@ -16,14 +18,13 @@ class App extends React.Component {
 				<h1> Address book</h1>
 				<List people={this.props.people} />
 				<Add addInfo={this.props.addInfo}/>
-				<div> you have 4 team memebers</div>
-				<div>list</div>
+				
 			</div>
 		)
 	}
 }
 
-
+//-----------List Component---------------
 class List extends React.Component {
 	_edit () {
 		console.log('edit1')
@@ -32,6 +33,10 @@ class List extends React.Component {
 	render() {
 		return (
 			<div className="people-list">
+				<header>
+					<h2> Team memebers </h2>
+					<p> You have 3 team memebers </p>
+				</header>
 				<ul className="list">
 					{this.props.people.map((person) => {
 						return <Person person={person} key={person.firstName} />
@@ -58,7 +63,7 @@ class Person extends React.Component {
 }
 
 
-
+//-----------Add Component---------------
 class Add extends React.Component {
 	constructor() {
     	super();
@@ -73,18 +78,14 @@ class Add extends React.Component {
 	_addNew (e) {
 		e.preventDefault();
 		this.props.addInfo(this.state);
-		// this.props.dispatch(addInfo(this.state))
 	}
 
 	_handleChange (e) {
-		// console.log(e)
-		// console.log(this.state)
 		let state = this.state;
 		let value = e.target.value;
 		let name = e.target.name;
 		state[name] = value;
 		this.setState(state);
-
 		//console.log(this.state)
 	}
 
@@ -103,25 +104,29 @@ class Add extends React.Component {
 					<form onSubmit={this._addNew.bind(this)}>
 						<div className="form-feild">
 							<label>First name</label>
-							<input type="text" name="firstName"  onChange={this._handleChange.bind(this)}  ref="firstName"/>
+							<input type="text" name="firstName"  onChange={this._handleChange.bind(this)} />
 
 						</div>
 						<div className="form-feild">
 							<label>Last name</label>
-							<input type="text" name="lastName" onChange={this._handleChange.bind(this)} value={this.props.lastname} ref="lastName" />
+							<input type="text" name="lastName" onChange={this._handleChange.bind(this)} value={this.props.lastname} />
 						</div>
 						<div className="form-feild">
 							<label>Email</label>
-							<input type="text" name="email" onChange={this._handleChange.bind(this)} value={this.props.email} ref="email" />
+							<input type="text" name="email" onChange={this._handleChange.bind(this)} value={this.props.email} />
 						</div>
 						<div className="phone-number">
 							<label>Phone</label>
-							<input type="text" name="phone" onChange={this._handleChange.bind(this)} value={this.props.phone} ref="phone" />
+							<input type="text" name="phone" onChange={this._handleChange.bind(this)} value={this.props.phone} />
 						</div>
-
-						<input type="submit" value="Submit" />
-
+						<div>
+							<h3> Role </h3>
+							<p>Regular - Can't delete members<input type="radio" name="regular" /></p>
+							<p>Admin - Can delete members<input type="radio" name="admin" /></p>
+						</div>
+						<input type="submit" value="Save" />
 					</form>
+
 				</div>
 
 			</div>
@@ -130,6 +135,7 @@ class Add extends React.Component {
 	}
 }
 
+//-----------Edit Component---------------
 
 // class Edite extends React.Component {
 	
@@ -178,17 +184,5 @@ function mapStateToProps(state) {
 		people:state
 	};
 }
-
-// function mapDispatchToProps(dispatch) {
-// 	return {
-
-// 	}
-// }
-// export default connect (
-// 	state => ({
-// 		people: state
-// 	}),
-// 	{ addInfo }
-// )(App);
 
 export default connect (mapStateToProps,{addInfo})(App);
