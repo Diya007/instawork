@@ -1,4 +1,6 @@
 import React, { Component } from 'react';	
+import { connect } from 'react-redux';
+import { addInfo } from '../actions/index'
 //import List from './list';
 
 // import styled from 'styled-components';
@@ -7,15 +9,13 @@ import React, { Component } from 'react';
 // 	display : flex;
 
 // ’
-
-
-export default class App extends React.Component {
+class App extends React.Component {
 	render() {
 		return (
 			<div id='app'>
 				<h1> Address book</h1>
 
-				<List />
+				<List examples={this.props.examples} />
 				<Add />
 				<div> you have 4 team memebers</div>
 				<div>list</div>
@@ -30,17 +30,34 @@ class List extends React.Component {
 		console.log('edit1')
 
 	}
-
 	render() {
 		return (
-			<div id="list">
-				<li onClick={this._edit}>1</li>
-				<li>2</li>
-				<li>3</li>
+			<div className="people-list">
+				<ul className="list">
+					{this.props.examples.map((person, id) => {
+						return <Person person={person} key={id} />
+						}
+					)}
+				</ul>
 			</div>
 		)
 	}
 }
+
+class Person extends React.Component {
+	render() {
+		return (
+			<li>
+				{this.props.person.firstName} <br />
+          		{this.props.person.lastName} <br />
+          		{this.props.person.email} <br />
+          		{this.props.person.phone} <br />
+			</li>
+		)
+	}
+}
+
+
 
 class Add extends React.Component {
 	_addNew (e) {
@@ -56,7 +73,9 @@ class Add extends React.Component {
 
 	_handleChange (e) {
 		let value = e.target.value;
+		let name = e.target.name;
 		console.log(value);
+		console.log('name',name)
 	}
 
 	render() {
@@ -73,6 +92,7 @@ class Add extends React.Component {
 						<div className="form-feild">
 							<label>First name</label>
 							<input type="text" name="firstName"  onChange={this._handleChange}  ref="firstName"/>
+
 						</div>
 						<div className="form-feild">
 							<label>Last name</label>
@@ -141,3 +161,10 @@ class Edite extends React.Component {
 }
 
 
+function mapStateToProps(state) {
+	return {
+		examples:state
+	};
+}
+
+export default connect (mapStateToProps,{addInfo})(App);
