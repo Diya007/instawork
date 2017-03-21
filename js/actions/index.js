@@ -1,12 +1,10 @@
 
-export const ADD_CONTACT = "ADD_CONTACT"; 
-export function addInfo(firstName, lastName, email, phone) {
+export const ADD_INFO = "ADD_INFO"; 
+
+export const addInfo = (info) => {
 	return {
-		type: ADD_CONTACT,
-		firstName: firstName,
-		lastName: lastName,
-		email: email,
-		phone: phone
+		type: ADD_INFO,
+		info
 	}
 }
 

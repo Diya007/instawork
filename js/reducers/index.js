@@ -1,7 +1,7 @@
 
-// import {
-// 	CREATE
-// } from './actions/index'
+import {
+	ADD_INFO
+} from '../actions/index'
 
 const initialState = [
 	{	
@@ -9,7 +9,6 @@ const initialState = [
 		lastName:'zhao',
 		email:'zdy',
 		phone:'1111',
-		id: 1
 	}
 ]
 	
@@ -17,9 +16,10 @@ const initialState = [
 export default function(state = initialState, action) {
   switch(action.type) {
     case 'ADD_INFO':
-    	let newContact = Object.assign({}, {firstName:action.firstName, lastName:action.lastName, email:action.email, phone:action.phone})
-      	return state.push(newContact);
+    	let newContact = action.info;
+    	console.log(newContact)
+      	return [...state, newContact];
   }
-
+  console.log(state)
   return state
 }
