@@ -1,6 +1,8 @@
 import React, { Component } from 'react';	
 import { connect } from 'react-redux';
-import { addInfo } from '../actions/index'
+import { addInfo } from '../actions/index';
+import FaPlusCircle from 'react-icons/lib/fa/plus-circle';
+import FaTimesCircle from 'react-icons/lib/fa/times-circle';
 //import List from './list';
 
 // import styled from 'styled-components';
@@ -18,6 +20,7 @@ class App extends React.Component {
 				<h1> Address book</h1>
 				<List people={this.props.people} />
 				<Add addInfo={this.props.addInfo}/>
+				<Edit />
 				
 			</div>
 		)
@@ -33,6 +36,7 @@ class List extends React.Component {
 	render() {
 		return (
 			<div className="people-list">
+				<FaPlusCircle />
 				<header>
 					<h2> Team memebers </h2>
 					<p> You have 3 team memebers </p>
@@ -94,6 +98,7 @@ class Add extends React.Component {
 
 		return (		
 			<div className="add">
+				<FaTimesCircle />
 				<header>
 					<h2> Add a team memeber </h2>
 					<p>Set email. location and role</p>
@@ -119,7 +124,7 @@ class Add extends React.Component {
 							<label>Phone</label>
 							<input type="text" name="phone" onChange={this._handleChange.bind(this)} value={this.props.phone} />
 						</div>
-						<div>
+						<div className="role">
 							<h3> Role </h3>
 							<p>Regular - Can't delete members<input type="radio" name="regular" /></p>
 							<p>Admin - Can delete members<input type="radio" name="admin" /></p>
@@ -137,46 +142,54 @@ class Add extends React.Component {
 
 //-----------Edit Component---------------
 
-// class Edite extends React.Component {
-	
-// 	render() {
-// 		return (
-// 			<div id="add">
-// 				<header>
-// 					<h2> Add a team memeber </h2>
-// 					<p>Set email. location and role</p>
-// 				</header>
+class Edit extends React.Component {
+	_edit (data) {
+		console.log('hello')
+	}
+	render() {
+		return (
+			<div className="edit">
+				<FaTimesCircle />
+				<header>
+					<h2> Edit team memeber </h2>
+					<p> Edit contact info, location and role.</p>
+				</header>
 
-// 				<div className="add-form">
-// 					<h3>Info</h3>
-// 					<form onSubmit={this._addNew}>
-// 						<div className="form-feild">
-// 							<label>First name</label>
-// 							<input type="text" name="firstName"  onChange={this._handleChange}  ref="firstName"/>
-// 						</div>
-// 						<div className="form-feild">
-// 							<label>Last name</label>
-// 							<input type="text" name="lastName" value={this.props.lastname} ref="lastName" />
-// 						</div>
-// 						<div className="form-feild">
-// 							<label>Email</label>
-// 							<input type="text" name="email" value={this.props.email} ref="email" />
-// 						</div>
-// 						<div className="phone-number">
-// 							<label>Phone</label>
-// 							<input type="text" name="phone" value={this.props.phone} ref="phone" />
-// 						</div>
+				<div className="eidt-form">
+					<h3>Info</h3>
+					<form onSubmit={this._edit}>
+						<div className="form-feild">
+							<label>First name</label>
+							<input type="text" name="firstName"  onChange={this._handleChange} />
+						</div>
+						<div className="form-feild">
+							<label>Last name</label>
+							<input type="text" name="lastName" value={this.props.lastname} />
+						</div>
+						<div className="form-feild">
+							<label>Email</label>
+							<input type="text" name="email" value={this.props.email} />
+						</div>
+						<div className="phone-number">
+							<label>Phone</label>
+							<input type="text" name="phone" value={this.props.phone}  />
+						</div>
+						<div className="role">
+							<h3> Role </h3>
+							<p>Regular - Can't delete members<input type="radio" name="regular" /></p>
+							<p>Admin - Can delete members<input type="radio" name="admin" /></p>
+						</div>
 
-// 						<input type="submit" value="Submit" />
+						<input type="submit" value="Save" />
 
-// 					</form>
-// 				</div>
+					</form>
+				</div>
 
-// 			</div>
+			</div>
 
-// 		)
-// 	}
-// }
+		)
+	}
+}
 
 
 function mapStateToProps(state) {
