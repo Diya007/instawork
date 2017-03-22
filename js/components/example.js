@@ -15,7 +15,7 @@ class App extends React.Component {
   }
 
   addPerson(person) {
-    let people = this.state.people;``
+    let people = this.state.people;
 
     people.push(person);
 

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { addInfo } from '../actions/index';
 import FaPlusCircle from 'react-icons/lib/fa/plus-circle';
 import FaTimesCircle from 'react-icons/lib/fa/times-circle';
+import MdEdit from 'react-icons/lib/md/edit';
 //import List from './list';
 
 // import styled from 'styled-components';
@@ -16,12 +17,14 @@ import FaTimesCircle from 'react-icons/lib/fa/times-circle';
 class App extends React.Component {
 	render() {
 		return (
-			<div id='app'>
+			<div className="app">
 				<h1> Address book</h1>
+				<hr />
 				<List people={this.props.people} />
+				<hr />
 				<Add addInfo={this.props.addInfo}/>
-				<Edit />
-				
+				<hr />
+				<Edit />	
 			</div>
 		)
 	}
@@ -36,7 +39,7 @@ class List extends React.Component {
 	render() {
 		return (
 			<div className="people-list">
-				<FaPlusCircle />
+				<FaPlusCircle className="pointer" />
 				<header>
 					<h2> Team memebers </h2>
 					<p> You have 3 team memebers </p>
@@ -54,9 +57,13 @@ class List extends React.Component {
 }
 
 class Person extends React.Component {
+	_callEdit() {
+		console.log('hello')
+	}
 	render() {
 		return (
 			<li>
+				<MdEdit onClick={this._callEdit} className="pointer"  />
 				{this.props.person.firstName} <br />
           		{this.props.person.lastName} <br />
           		{this.props.person.email} <br />
@@ -98,7 +105,7 @@ class Add extends React.Component {
 
 		return (		
 			<div className="add">
-				<FaTimesCircle />
+				<FaTimesCircle className="pointer"  />
 				<header>
 					<h2> Add a team memeber </h2>
 					<p>Set email. location and role</p>
@@ -149,7 +156,7 @@ class Edit extends React.Component {
 	render() {
 		return (
 			<div className="edit">
-				<FaTimesCircle />
+				<FaTimesCircle className="pointer"  />
 				<header>
 					<h2> Edit team memeber </h2>
 					<p> Edit contact info, location and role.</p>
