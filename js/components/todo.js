@@ -5,3 +5,5 @@
 // what is key in list component
 // using bind(this) to bind the function with the whole component to allow it access the state;
 // need to add role in state in reducers for each object
+// set ratio input to blank after submit
+// can't deploy it on heroku

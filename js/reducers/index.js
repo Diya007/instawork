@@ -27,7 +27,8 @@ export default function(state = initialState, action) {
       		return [...state, newContact];
 
       	case 'SELECTED_INFO' :
-      		return []
+      		console.log(action.id);
+      		return state
   	}
  
   	return state

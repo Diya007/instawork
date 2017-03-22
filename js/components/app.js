@@ -1,6 +1,6 @@
 import React, { Component } from 'react';	
 import { connect } from 'react-redux';
-import { addInfo } from '../actions/index';
+import { addInfo, selectedInfo } from '../actions/index';
 import FaPlusCircle from 'react-icons/lib/fa/plus-circle';
 import FaTimesCircle from 'react-icons/lib/fa/times-circle';
 import MdEdit from 'react-icons/lib/md/edit';
@@ -20,7 +20,7 @@ class App extends React.Component {
 			<div className="app">
 				<h1> Address book</h1>
 				<hr />
-				<List people={this.props.people} />
+				<List people={this.props.people} selectedInfo={this.props.selectedInfo} />
 				<hr />
 				<Add addInfo={this.props.addInfo}/>
 				<hr />
@@ -40,39 +40,49 @@ class List extends React.Component {
 					<h2> Team memebers </h2>
 					<p> You have 3 team memebers </p>
 				</header>
-				<ul className="list">
+
+				<ul className="list" >
 					{this.props.people.map((person) => {
-						return <Person person={person} key={person.firstName} />
-						//console.log(person.firstName)
+						return <Person person={person} key={person.id} selectedInfo={this.props.selectedInfo} />
 						}
 					)}
 				</ul>
+
 			</div>
 		)
 	}
 }
 
 class Person extends React.Component {
+	constructor() {
+    	super();
+    	this.state = {
+    		show: false
+    	};
+      
+    }
 	_callEdit() {
-	
-		console.log(this.props.person)
+		// this.setState({show: true})
+		let id = this.props.person.id;
+		this.props.selectedInfo(id);
 
 	}
-	render() {
-		
+	render() {	
 		return (
-			<li onClick={this._callEdit.bind(this)} className="pointer" >
-				<MdEdit />
-				{this.props.person.firstName} 
-          		{this.props.person.lastName} <br />
-          		{this.props.person.email} <br />
-          		{this.props.person.phone} <br />
-          		{this.props.person.regular === 'on' ? "Regular member" : "Admin"}
-			</li>
+			<div>
+				<li className="pointer" onClick={this._callEdit.bind(this)}>
+					<MdEdit />
+					{this.props.person.firstName} 
+	          		{this.props.person.lastName} <br />
+	          		{this.props.person.email} <br />
+	          		{this.props.person.phone} <br />
+	          		{this.props.person.regular === 'on' ? "Regular member" : "Admin"}
+				</li>
+
+			</div>
 		)
 	}
 }
-
 
 //-----------Add Component---------------
 class Add extends React.Component {
@@ -91,6 +101,15 @@ class Add extends React.Component {
 	_addNew (e) {
 		e.preventDefault();
 		this.props.addInfo(this.state);
+		this.setState({
+			firstName:"",
+			lastName:"",
+			email:"",
+			phone:"",
+			regular: "",
+			admin: ""
+
+		})
 
 	}
 
@@ -118,25 +137,25 @@ class Add extends React.Component {
 					<form onSubmit={this._addNew.bind(this)}>
 						<div className="form-feild">
 							<label>First name</label>
-							<input type="text" name="firstName"  onChange={this._handleChange.bind(this)} value={this.props.firstname} />
+							<input type="text" name="firstName"  onChange={this._handleChange.bind(this)} value={this.state.firstName} />
 
 						</div>
 						<div className="form-feild">
 							<label>Last name</label>
-							<input type="text" name="lastName" onChange={this._handleChange.bind(this)} value={this.props.lastname} />
+							<input type="text" name="lastName" onChange={this._handleChange.bind(this)} value={this.state.lastName} />
 						</div>
 						<div className="form-feild">
 							<label>Email</label>
-							<input type="text" name="email" onChange={this._handleChange.bind(this)} value={this.props.email} />
+							<input type="text" name="email" onChange={this._handleChange.bind(this)} value={this.state.email} />
 						</div>
 						<div className="phone-number">
 							<label>Phone</label>
-							<input type="text" name="phone" onChange={this._handleChange.bind(this)} value={this.props.phone} />
+							<input type="text" name="phone" onChange={this._handleChange.bind(this)} value={this.state.phone} />
 						</div>
 						<div className="role">
 							<h3> Role </h3>
-							<p>Regular - Can't delete members<input type="radio" name="regular" onChange={this._handleChange.bind(this)} /></p>
-							<p>Admin - Can delete members<input type="radio" name="admin" onChange={this._handleChange.bind(this)} /></p>
+							<p>Regular - Can't delete members<input type="radio" name="regular" onChange={this._handleChange.bind(this)} value={this.state.regular} /></p>
+							<p>Admin - Can delete members<input type="radio" name="admin" onChange={this._handleChange.bind(this)} value={this.state.admin} /></p>
 						</div>
 						<input type="submit" value="Save" />
 					</form>
@@ -208,4 +227,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect (mapStateToProps,{addInfo})(App);
+export default connect (mapStateToProps,{addInfo, selectedInfo})(App);
