@@ -24,7 +24,6 @@ class App extends React.Component {
 				<List people={this.props.people} selectedInfo={this.props.selectedInfo} deleteInfo={this.props.deleteInfo} />
 				<hr />
 				<Add addInfo={this.props.addInfo}/>
-				
 			</div>
 		)
 	}
@@ -142,27 +141,27 @@ class Add extends React.Component {
 						<h3>Info</h3>
 						<div className="form-feild">
 							<label>First name</label>
-							<input type="text" name="firstName"  onChange={this._handleChange.bind(this)} value={this.state.firstName} />
+							<input className="textarea" type="text" name="firstName"  onChange={this._handleChange.bind(this)} value={this.state.firstName} />
 
 						</div>
 						<div className="form-feild">
 							<label>Last name</label>
-							<input type="text" name="lastName" onChange={this._handleChange.bind(this)} value={this.state.lastName} />
+							<input className="textarea" type="text" name="lastName" onChange={this._handleChange.bind(this)} value={this.state.lastName} />
 						</div>
 						<div className="form-feild">
 							<label>Email</label>
-							<input type="text" name="email" onChange={this._handleChange.bind(this)} value={this.state.email} />
+							<input className="textarea"  type="text" name="email" onChange={this._handleChange.bind(this)} value={this.state.email} />
 						</div>
 						<div className="phone-number">
 							<label>Phone</label>
-							<input type="text" name="phone" onChange={this._handleChange.bind(this)} value={this.state.phone} />
+							<input className="textarea"  type="text" name="phone" onChange={this._handleChange.bind(this)} value={this.state.phone} />
 						</div>
 					</div>
 
 					<div className="role">
 						<h3> Role </h3>
-						Regular - Can't delete members<input type="radio" name="regular" onChange={this._handleChange.bind(this)} value={this.state.regular} />
-						Admin - Can delete members<input type="radio" name="admin" onChange={this._handleChange.bind(this)} value={this.state.admin} />
+						<p>Regular - Can't delete members<input type="radio" name="regular" onChange={this._handleChange.bind(this)} value={this.state.regular} /></p>
+						<p>Admin - Can delete members<input type="radio" name="admin" onChange={this._handleChange.bind(this)} value={this.state.admin} /></p>
 					</div>
 
 					<input className="button" type="submit" value="Save" />
@@ -242,19 +241,19 @@ class Edit extends React.Component {
 						<h3>Info</h3>
 						<div className="form-feild">
 							<label>First name</label>
-							<input type="text" name="firstName" value={this.props.firstName} onChange={this._handleChange.bind(this)} />
+							<input className="textarea" type="text" name="firstName" value={this.props.firstName} onChange={this._handleChange.bind(this)} />
 						</div>
 						<div className="form-feild">
 							<label>Last name</label>
-							<input type="text" name="lastName" value={this.props.lastName} onChange={this._handleChange.bind(this)} />
+							<input className="textarea" type="text" name="lastName" value={this.props.lastName} onChange={this._handleChange.bind(this)} />
 						</div>
 						<div className="form-feild">
 							<label>Email</label>
-							<input type="text" name="email" value={this.props.email} onChange={this._handleChange.bind(this)} />
+							<input className="textarea" type="text" name="email" value={this.props.email} onChange={this._handleChange.bind(this)} />
 						</div>
 						<div className="phone-number">
 							<label>Phone</label>
-							<input type="text" name="phone" value={this.props.phone} onChange={this._handleChange.bind(this)} />
+							<input className="textarea" type="text" name="phone" value={this.props.phone} onChange={this._handleChange.bind(this)} />
 						</div>
 					</div>
 

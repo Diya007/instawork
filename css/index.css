@@ -38,7 +38,7 @@ body {
 }
 
 
-input {
+input.textarea {
     display: block;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -94,6 +94,13 @@ li.person {
     display: table-cell;
     background: #7adcef;
     cursor: pointer;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 45px;
+    padding: 8px 10px;
+    outline: none;
+    border: 2px solid #e5e5e5;
+    border-radius: 0;
 }
 //------------edit form--------------
 
