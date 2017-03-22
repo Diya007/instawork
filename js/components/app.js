@@ -32,10 +32,6 @@ class App extends React.Component {
 
 //-----------List Component---------------
 class List extends React.Component {
-	_edit () {
-		console.log('edit1')
-
-	}
 	render() {
 		return (
 			<div className="people-list">
@@ -58,13 +54,17 @@ class List extends React.Component {
 
 class Person extends React.Component {
 	_callEdit() {
-		console.log('hello')
+	
+		console.log(this.props)
+
 	}
 	render() {
+		let person = this.props.person;
+		console.log(this.props.person)
 		return (
-			<li>
-				<MdEdit onClick={this._callEdit} className="pointer"  />
-				{this.props.person.firstName} <br />
+			<li onClick={this._callEdit.bind(this)} className="pointer" >
+				<MdEdit />
+				{this.props.person.firstName} 
           		{this.props.person.lastName} <br />
           		{this.props.person.email} <br />
           		{this.props.person.phone} <br />
