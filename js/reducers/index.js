@@ -1,18 +1,37 @@
 
 import {
 	ADD_INFO,
-	SELECTED_INFO
+	SELECTED_INFO,
+	DELETE_INFO
 } from '../actions/index'
 
 const initialState = [
 	{	
-		firstName:'diya',
-		lastName:'zhao',
-		email:'zdy',
-		phone:'1111',
+		firstName:'Adrien',
+		lastName:'Olczak',
+		email:'adrien@instawork.com',
+		phone:'415-310-1619',
 		regular: '',
 		admi: 'on',
 		id: 1
+	},
+	{	
+		firstName:'Charlene',
+		lastName:'Pham',
+		email:'charlene@instawork.com',
+		phone:'415-310-1619',
+		regular: '',
+		admi: 'on',
+		id: 2
+	},
+	{	
+		firstName:'Beanson',
+		lastName:'Mach',
+		email:'benson@instawork.com',
+		phone:'415-310-1619',
+		regular: '',
+		admi: 'on',
+		id: 3
 	}
 ]
 	
@@ -36,6 +55,9 @@ export default function(state = initialState, action) {
       				: item
 
       		)
+
+      	case 'DELETE_INFO' :
+      		return state.filter(item => item.id !== action.id);
   	}
  
   	return state

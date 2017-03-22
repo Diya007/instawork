@@ -17,3 +17,11 @@ export const selectedInfo = (info, id) => {
 		id: id
 	}
 }
+
+export const DELETE_INFO = "DELETE_INFO"
+export const deleteInfo = (id) => {
+	return {
+		type: DELETE_INFO,
+		id
+	}
+}

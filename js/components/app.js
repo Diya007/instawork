@@ -1,6 +1,6 @@
 import React, { Component } from 'react';	
 import { connect } from 'react-redux';
-import { addInfo, selectedInfo } from '../actions/index';
+import { addInfo, selectedInfo,deleteInfo } from '../actions/index';
 import FaPlusCircle from 'react-icons/lib/fa/plus-circle';
 import FaTimesCircle from 'react-icons/lib/fa/times-circle';
 import MdEdit from 'react-icons/lib/md/edit';
@@ -20,7 +20,7 @@ class App extends React.Component {
 			<div className="app">
 				<h1> Address book</h1>
 				<hr />
-				<List people={this.props.people} selectedInfo={this.props.selectedInfo} />
+				<List people={this.props.people} selectedInfo={this.props.selectedInfo} deleteInfo={this.props.deleteInfo} />
 				<hr />
 				<Add addInfo={this.props.addInfo}/>
 				
@@ -42,7 +42,7 @@ class List extends React.Component {
 
 				<ul className="list" >
 					{this.props.people.map((person) => {
-						return <Person person={person} key={person.id} selectedInfo={this.props.selectedInfo} />
+						return <Person person={person} key={person.id} selectedInfo={this.props.selectedInfo} deleteInfo={this.props.deleteInfo} />
 						}
 					)}
 				</ul>
@@ -63,20 +63,11 @@ class Person extends React.Component {
 
 	_callEdit() {
 		this.setState({show: true});
-
-		// let id = this.props.person.id;
-		// let firstName = this.props.person.firstName;
-		// let lastName = this.props.person.lastName;
-		// let email = this.props.person.email;
-		// let phone = this.props.person.phone;
-		// let regular = this.props.person.regular;
-
-		//this.props.selectedInfo(id, firstName, lastName, email, phone, regular)
 	}
 
 	render() {	
 		return (
-			<div>
+			<div className="person">
 				<li className="pointer" onClick={this._callEdit.bind(this)}>
 					<MdEdit />
 					{this.props.person.firstName} &nbsp;
@@ -86,7 +77,7 @@ class Person extends React.Component {
 	          		{this.props.person.regular === 'on' ? "Regular member" : "Admin"}
 				</li>
 
-				{this.state.show ? <Edit selectedInfo={this.props.selectedInfo} id={this.props.person.id} firstName={this.props.person.firstName} regular={this.props.person.regular} /> : null }
+				{this.state.show ? <Edit selectedInfo={this.props.selectedInfo} deleteInfo={this.props.deleteInfo} id={this.props.person.id} /> : null }
 
 			</div>
 		)
@@ -143,7 +134,7 @@ class Add extends React.Component {
 
 				<div className="add-form">
 					<h3>Info</h3>
-					<form onSubmit={this._addNew.bind(this)}>
+					<form className="frame" onSubmit={this._addNew.bind(this)}>
 						<div className="form-feild">
 							<label>First name</label>
 							<input type="text" name="firstName"  onChange={this._handleChange.bind(this)} value={this.props.firstName} />
@@ -200,8 +191,14 @@ class Edit extends React.Component {
 		e.preventDefault();
 		//this.setState({show: false});
 		let id=this.props.id;
-		console.log(id);
+		
 		this.props.selectedInfo(this.state.editingContact, id )
+	}
+
+	_delete() {
+		let id=this.props.id;
+		console.log(id);
+		this.props.deleteInfo(id);
 	}
 
 	_handleChange (e) {
@@ -249,7 +246,7 @@ class Edit extends React.Component {
 						</div>
 
 						<input type="submit" value="Save" />
-						<input type="submit" value="Delete" />
+						<input type="button" value="Delete" onClick={this._delete.bind(this)} />
 
 					</form>
 				</div>
@@ -267,4 +264,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect (mapStateToProps,{addInfo, selectedInfo})(App);
+export default connect (mapStateToProps,{ addInfo, selectedInfo, deleteInfo })(App);
