@@ -8,5 +8,12 @@
 // set ratio input to blank after submit
 // can't deploy it on heroku
 
+   edit frame {
+   	right: 25px;
+    position: fixed;
+    top: 10px;
+
+   } 
+
 
 function handleRole (e) { const { regular, admin } = this.state if (e.target.name === 'regular' && e.target.value) { this.setState({regular: true, admin: false}) } else if (e.target.name === 'admin' && e.target.value) { this.setState({regular: false, admin: true}) } }
