@@ -55,12 +55,11 @@ class List extends React.Component {
 class Person extends React.Component {
 	_callEdit() {
 	
-		console.log(this.props)
+		console.log(this.props.person)
 
 	}
 	render() {
-		let person = this.props.person;
-		console.log(this.props.person)
+		
 		return (
 			<li onClick={this._callEdit.bind(this)} className="pointer" >
 				<MdEdit />
@@ -68,6 +67,7 @@ class Person extends React.Component {
           		{this.props.person.lastName} <br />
           		{this.props.person.email} <br />
           		{this.props.person.phone} <br />
+          		{this.props.person.regular === 'on' ? "Regular member" : "Admin"}
 			</li>
 		)
 	}
@@ -82,13 +82,16 @@ class Add extends React.Component {
     		firstName:"",
 			lastName:"",
 			email:"",
-			phone:""
+			phone:"",
+			regular: "",
+			admin: ""
     	}
       
     }
 	_addNew (e) {
 		e.preventDefault();
 		this.props.addInfo(this.state);
+
 	}
 
 	_handleChange (e) {
@@ -97,12 +100,11 @@ class Add extends React.Component {
 		let name = e.target.name;
 		state[name] = value;
 		this.setState(state);
-		//console.log(this.state)
+		console.log(this.state)
+
 	}
 
 	render() {
-		console.log(this);
-
 		return (		
 			<div className="add">
 				<FaTimesCircle className="pointer"  />
@@ -116,7 +118,7 @@ class Add extends React.Component {
 					<form onSubmit={this._addNew.bind(this)}>
 						<div className="form-feild">
 							<label>First name</label>
-							<input type="text" name="firstName"  onChange={this._handleChange.bind(this)} />
+							<input type="text" name="firstName"  onChange={this._handleChange.bind(this)} value={this.props.firstname} />
 
 						</div>
 						<div className="form-feild">
@@ -133,8 +135,8 @@ class Add extends React.Component {
 						</div>
 						<div className="role">
 							<h3> Role </h3>
-							<p>Regular - Can't delete members<input type="radio" name="regular" /></p>
-							<p>Admin - Can delete members<input type="radio" name="admin" /></p>
+							<p>Regular - Can't delete members<input type="radio" name="regular" onChange={this._handleChange.bind(this)} /></p>
+							<p>Admin - Can delete members<input type="radio" name="admin" onChange={this._handleChange.bind(this)} /></p>
 						</div>
 						<input type="submit" value="Save" />
 					</form>
@@ -188,6 +190,7 @@ class Edit extends React.Component {
 						</div>
 
 						<input type="submit" value="Save" />
+						<input type="submit" value="Delete" />
 
 					</form>
 				</div>

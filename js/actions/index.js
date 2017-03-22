@@ -10,9 +10,9 @@ export const addInfo = (info) => {
 
 
 export const SELECTED_INFO = "SELECTED_INFO";
-export const seclectedInfo = (info) => {
+export const seclectedInfo = (person) => {
 	return {
 		type: SELECTED_INFO,
-		info
+		person
 	}
 }
