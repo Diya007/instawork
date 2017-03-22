@@ -10,9 +10,10 @@ export const addInfo = (info) => {
 
 
 export const SELECTED_INFO = "SELECTED_INFO";
-export const selectedInfo = (id) => {
+export const selectedInfo = (info, id) => {
 	return {
 		type: SELECTED_INFO,
-		id
+		info: info,
+		id: id
 	}
 }

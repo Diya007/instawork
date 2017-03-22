@@ -7,3 +7,6 @@
 // need to add role in state in reducers for each object
 // set ratio input to blank after submit
 // can't deploy it on heroku
+
+
+function handleRole (e) { const { regular, admin } = this.state if (e.target.name === 'regular' && e.target.value) { this.setState({regular: true, admin: false}) } else if (e.target.name === 'admin' && e.target.value) { this.setState({regular: false, admin: true}) } }

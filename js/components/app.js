@@ -23,8 +23,7 @@ class App extends React.Component {
 				<List people={this.props.people} selectedInfo={this.props.selectedInfo} />
 				<hr />
 				<Add addInfo={this.props.addInfo}/>
-				<hr />
-				<Edit />	
+				
 			</div>
 		)
 	}
@@ -61,23 +60,33 @@ class Person extends React.Component {
     	};
       
     }
-	_callEdit() {
-		// this.setState({show: true})
-		let id = this.props.person.id;
-		this.props.selectedInfo(id);
 
+	_callEdit() {
+		this.setState({show: true});
+
+		// let id = this.props.person.id;
+		// let firstName = this.props.person.firstName;
+		// let lastName = this.props.person.lastName;
+		// let email = this.props.person.email;
+		// let phone = this.props.person.phone;
+		// let regular = this.props.person.regular;
+
+		//this.props.selectedInfo(id, firstName, lastName, email, phone, regular)
 	}
+
 	render() {	
 		return (
 			<div>
 				<li className="pointer" onClick={this._callEdit.bind(this)}>
 					<MdEdit />
-					{this.props.person.firstName} 
+					{this.props.person.firstName} &nbsp;
 	          		{this.props.person.lastName} <br />
 	          		{this.props.person.email} <br />
 	          		{this.props.person.phone} <br />
 	          		{this.props.person.regular === 'on' ? "Regular member" : "Admin"}
 				</li>
+
+				{this.state.show ? <Edit selectedInfo={this.props.selectedInfo} id={this.props.person.id} firstName={this.props.person.firstName} regular={this.props.person.regular} /> : null }
 
 			</div>
 		)
@@ -137,20 +146,20 @@ class Add extends React.Component {
 					<form onSubmit={this._addNew.bind(this)}>
 						<div className="form-feild">
 							<label>First name</label>
-							<input type="text" name="firstName"  onChange={this._handleChange.bind(this)} value={this.state.firstName} />
+							<input type="text" name="firstName"  onChange={this._handleChange.bind(this)} value={this.props.firstName} />
 
 						</div>
 						<div className="form-feild">
 							<label>Last name</label>
-							<input type="text" name="lastName" onChange={this._handleChange.bind(this)} value={this.state.lastName} />
+							<input type="text" name="lastName" onChange={this._handleChange.bind(this)} value={this.props.lastName} />
 						</div>
 						<div className="form-feild">
 							<label>Email</label>
-							<input type="text" name="email" onChange={this._handleChange.bind(this)} value={this.state.email} />
+							<input type="text" name="email" onChange={this._handleChange.bind(this)} value={this.props.email} />
 						</div>
 						<div className="phone-number">
 							<label>Phone</label>
-							<input type="text" name="phone" onChange={this._handleChange.bind(this)} value={this.state.phone} />
+							<input type="text" name="phone" onChange={this._handleChange.bind(this)} value={this.props.phone} />
 						</div>
 						<div className="role">
 							<h3> Role </h3>
@@ -171,13 +180,44 @@ class Add extends React.Component {
 //-----------Edit Component---------------
 
 class Edit extends React.Component {
-	_edit (data) {
-		console.log('hello')
+	constructor() {
+    	super();
+    	this.state = {
+    		show: true,
+    		editingContact: {
+    			firstName:"",
+				lastName:"",
+				email:"",
+				phone:"",
+				regular: "",
+				admin: ""
+
+    		}
+    	};
+      
+    }
+	_hide(e) {
+		e.preventDefault();
+		//this.setState({show: false});
+		let id=this.props.id;
+		console.log(id);
+		this.props.selectedInfo(this.state.editingContact, id )
 	}
+
+	_handleChange (e) {
+		let editingContact = this.state.editingContact;
+		let value = e.target.value;
+		let name = e.target.name;
+		editingContact[name] = value;
+		this.setState(editingContact);
+		console.log(this.state.editingContact)
+
+	}
+
 	render() {
 		return (
-			<div className="edit">
-				<FaTimesCircle className="pointer"  />
+			<div className="edit" >
+				<FaTimesCircle className="pointer"  onClick={this._hide.bind(this)}/>
 				<header>
 					<h2> Edit team memeber </h2>
 					<p> Edit contact info, location and role.</p>
@@ -185,27 +225,27 @@ class Edit extends React.Component {
 
 				<div className="eidt-form">
 					<h3>Info</h3>
-					<form onSubmit={this._edit}>
+					<form onSubmit={this._hide.bind(this)} >
 						<div className="form-feild">
 							<label>First name</label>
-							<input type="text" name="firstName"  onChange={this._handleChange} />
+							<input type="text" name="firstName"  onChange={this._handleChange.bind(this)} />
 						</div>
 						<div className="form-feild">
 							<label>Last name</label>
-							<input type="text" name="lastName" value={this.props.lastname} />
+							<input type="text" name="lastName" value={this.props.lastname} onChange={this._handleChange.bind(this)} />
 						</div>
 						<div className="form-feild">
 							<label>Email</label>
-							<input type="text" name="email" value={this.props.email} />
+							<input type="text" name="email" value={this.props.email} onChange={this._handleChange.bind(this)} />
 						</div>
 						<div className="phone-number">
 							<label>Phone</label>
-							<input type="text" name="phone" value={this.props.phone}  />
+							<input type="text" name="phone" value={this.props.phone} onChange={this._handleChange.bind(this)} />
 						</div>
 						<div className="role">
 							<h3> Role </h3>
-							<p>Regular - Can't delete members<input type="radio" name="regular" /></p>
-							<p>Admin - Can delete members<input type="radio" name="admin" /></p>
+							<p>Regular - Can't delete members<input type="radio" name="regular" value={this.props.regular} onChange={this._handleChange.bind(this)} /></p>
+							<p>Admin - Can delete members<input type="radio" name="admin" value={this.props.admin}  onChange={this._handleChange.bind(this)} /></p>
 						</div>
 
 						<input type="submit" value="Save" />

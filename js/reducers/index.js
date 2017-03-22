@@ -28,7 +28,14 @@ export default function(state = initialState, action) {
 
       	case 'SELECTED_INFO' :
       		console.log(action.id);
-      		return state
+      		return state.map(item => 
+      			item.id === action.id ?
+      				{...item,
+      					...action.info
+      				}
+      				: item
+
+      		)
   	}
  
   	return state
