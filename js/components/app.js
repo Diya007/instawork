@@ -152,8 +152,8 @@ class Add extends React.Component {
 
 					<div className="role">
 						<h3> Role </h3>
-						<p>Regular Can not delete members<input type="radio" name="regular" onChange={this._handleChange.bind(this)} value={this.state.regular} /></p>
-						<p>Admin  Can delete members<input type="radio" name="admin" onChange={this._handleChange.bind(this)} value={this.state.admin} /></p>
+						<p>Regular - Can not delete members<input type="radio" name="regular" onChange={this._handleChange.bind(this)} value={this.state.regular} /></p>
+						<p>Admin - Can delete members<input type="radio" name="admin" onChange={this._handleChange.bind(this)} value={this.state.admin} /></p>
 					</div>
 
 					<input className="button" type="submit" value="Save" />
@@ -250,7 +250,7 @@ class Edit extends React.Component {
 
 					<div className="role">
 						<h3> Role </h3>
-						<p>Regular - Can't delete members<input type="radio" name="regular" value={this.props.regular} onChange={this._handleChange.bind(this)} /></p>
+						<p>Regular - Can not delete members<input type="radio" name="regular" value={this.props.regular} onChange={this._handleChange.bind(this)} /></p>
 						<p>Admin - Can delete members<input type="radio" name="admin" value={this.props.admin}  onChange={this._handleChange.bind(this)} /></p>
 					</div>
 
