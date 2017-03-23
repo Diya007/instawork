@@ -6,7 +6,7 @@ import FaTimesCircle from 'react-icons/lib/fa/times-circle';
 import MdAccountCircle from 'react-icons/lib/md/account-circle';
 import MdEdit from 'react-icons/lib/md/edit';
 
-//-----------App Component---------------
+{/* -----------App Component---------------*/}
 class App extends React.Component {
 	render() {
 		return (
@@ -21,7 +21,7 @@ class App extends React.Component {
 	}
 }
 
-//-----------List Component---------------
+{/*-----------List Component---------------*/}
 class List extends React.Component {
 	render() {
 		return (
@@ -77,7 +77,7 @@ class Person extends React.Component {
 	}
 }
 
-//-----------Add Component---------------
+{/*-----------Add Component---------------*/}
 class Add extends React.Component {
 	constructor() {
     	super();
@@ -165,7 +165,7 @@ class Add extends React.Component {
 	}
 }
 
-//-----------Edit Component---------------
+{/*-----------Edit Component---------------*/}
 
 class Edit extends React.Component {
 	constructor() {
