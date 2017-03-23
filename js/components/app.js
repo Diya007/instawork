@@ -5,14 +5,6 @@ import FaPlusCircle from 'react-icons/lib/fa/plus-circle';
 import FaTimesCircle from 'react-icons/lib/fa/times-circle';
 import MdAccountCircle from 'react-icons/lib/md/account-circle';
 import MdEdit from 'react-icons/lib/md/edit';
-//import List from './list';
-
-// import styled from 'styled-components';
-
-// const AppWrapper = styled.div‘
-// 	display : flex;
-
-// ’
 
 //-----------App Component---------------
 class App extends React.Component {
@@ -194,7 +186,6 @@ class Edit extends React.Component {
     }
 	_edit(e) {
 		e.preventDefault();
-		//this.setState({show: false});
 		let id=this.props.id;
 		
 		this.props.selectedInfo(this.state.editingContact, id)
